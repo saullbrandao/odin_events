@@ -1,0 +1,14 @@
+<h1>Create Event</h1>
+
+<%= simple_form_for(@event) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :location %>
+  <%= f.input :date %>
+  <%= f.button :submit, data: { turbo: false } %>
+<% end %>
+
+<br />
+
+<%= link_to "Back", root_path %>

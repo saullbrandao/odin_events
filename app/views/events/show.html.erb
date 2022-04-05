@@ -7,6 +7,10 @@
   <%= button_to "Attend", invitations_path(event_id: @event.id), method: :post%>
 <% end %>
 
+<% if current_user == @event.creator %>
+  <%= link_to "Edit Event", edit_event_path  %>
+<% end %>
+
 <div>
   <h2>Attendees</h2>
   <ul>

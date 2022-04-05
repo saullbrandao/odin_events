@@ -13,6 +13,15 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <nav>
+      <%= link_to "Events", root_path %>
+      <%= link_to "Profile", current_user %>
+      <% if current_user %>
+        <%= button_to "Logout", destroy_user_session_path, method: :delete, data: { turbo: false } %>
+      <% else %>
+        <%= link_to "Login", new_user_session_path %>
+      <% end %>
+    </nav>
     <%= yield %>
   </body>
 </html>

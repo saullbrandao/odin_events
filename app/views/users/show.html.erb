@@ -4,7 +4,27 @@
   <h2>Events Created</h2>
   <% @user.created_events.each do |event|  %>
     <li>
-      <span><%= event.title %></span>
+      <%= link_to event.title, event_path(event) %>
+    </li>
+  <% end %>
+</ul>
+
+<ul>
+  <h2>Upcoming Events</h2>
+  <% upcoming_events = @user.attended_events.where('date >= ?', Date.today) %>
+  <% upcoming_events.each do |event|  %>
+    <li>
+      <%= link_to event.title, event_path(event) %>
+    </li>
+  <% end %>
+</ul>
+
+<ul>
+  <h2>Attended Events</h2>
+  <% attended_events = @user.attended_events.where('date < ?', Date.today) %>
+  <% attended_events.each do |event|  %>
+    <li>
+      <%= link_to event.title, event_path(event) %>
     </li>
   <% end %>
 </ul>

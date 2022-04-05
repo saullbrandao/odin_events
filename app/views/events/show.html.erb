@@ -1,6 +1,25 @@
 <h1><%= @event.title %></h1>
+<p>Hosted by <%= @event.creator.name %></p>
 <p><%= @event.description %></p>
 <p>Location: <%= @event.location %></p>
 <p>Date: <%= @event.date %></p>
+<% unless @event.attendees.include?(current_user) %>
+  <%= button_to "Attend", invitations_path(event_id: @event.id), method: :post%>
+<% end %>
+
+<div>
+  <h2>Attendees</h2>
+  <ul>
+    <% @event.attendees.each do |attendee| %>
+      <li>
+        <%= attendee.name %>
+        <% if attendee == current_user %>
+          <% current_invitation = Invitation.find_by(user_id: attendee.id, event_id: @event.id) %>
+          <%= button_to "Leave", current_invitation, method: :delete%>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <%= link_to "Back", root_path %>
